@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div style="background-color: lightcoral; width: 25%">
+        <h2>Deleting user</h2>
+        <p>Name: <span th:text="${deletedUser.getName()}"></span></p>
+        <p>Surname: <span th:text="${deletedUser.getSurname()}"></span></p>
+        <p>Age: <span th:text="${deletedUser.getAge()}"></span></p>
+
+        <br>
+
+        <form th:method="DELETE" th:action="@{/}" th:object="${deletedUser}">
+
+            <input type="hidden" th:field="*{id}" id="id">
+            <input type="hidden" th:field="*{name}" id="name">
+            <input type="hidden" th:field="*{surname}" id="surname">
+            <input type="hidden" th:field="*{age}" id="age">
+
+            <input type="submit" value="Delete">
+        </form>
+
+    </div>
+</body>
+</html>
