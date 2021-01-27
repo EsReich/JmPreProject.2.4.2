@@ -44,14 +44,16 @@ public class UserDAOImpl implements UserDAO {
 //        TypedQuery<User> query = em.createQuery("UPDATE User set name = :userName, " +
 //                "surname = :userSurname, age = :userAge where id = :userId", User.class);
 
-        Query query = em.createQuery("UPDATE User set name = :userName, " +
-                "surname = :userSurname, age = :userAge where id = :userId");
+//        Query query = em.createQuery("UPDATE User set name = :userName, " +
+//                "surname = :userSurname, age = :userAge where id = :userId");
+//
+//        query.setParameter("userName", user.getName());
+//        query.setParameter("userSurname", user.getSurname());
+//        query.setParameter("userAge", user.getAge());
+//        query.setParameter("userId", user.getId());
+//        query.executeUpdate();
 
-        query.setParameter("userName", user.getName());
-        query.setParameter("userSurname", user.getSurname());
-        query.setParameter("userAge", user.getAge());
-        query.setParameter("userId", user.getId());
-        query.executeUpdate();
+        em.merge(user);
 //
 //        transaction.commit();
 //        session.close();
