@@ -33,12 +33,6 @@ public class UserServiceImpl implements UserService {
         userDAO.updateUser(user);
     }
 
-//    @Override
-//    @Transactional
-//    public void saveOrUpdateUser(User user) {
-//        userDAO.saveOrUpdateUser(user);
-//    }
-
     @Override
     @Transactional
     public void deleteUser(User user) {
@@ -47,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User getUser(Integer id) {
-        return userDAO.getUser(id);
+    public User getUserById(Integer id) {
+        return userDAO.getUserById(id);
     }
 }

@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <title></title>
 </head>
+
+
 <body>
 
-    <div style="text-align: center; background-color: antiquewhite; width: 25%">
+    <div style="text-align: center; background-color: lightblue; width: 25%">
         <h1><bold>User Info</bold></h1>
 
         <br>
 
         <div style="text-align: left">
 
-            <form action="#" th:method="PATCH" th:action="@{/admin}" th:object="${patchedUser}">
-
-                <input type="hidden" th:field="*{id}" id="id">
-
+            <form th:method="POST" th:action="@{/admin}" th:object="${new_user}">
                 <label for="name">Name</label>
                 <input type="text" th:field="*{name}" id="name">
 
@@ -33,27 +32,26 @@
                 <br><br>
 
                 <label for="email">Email</label>
-                <input type="text" th:field="*{email}" id="email">
+                <input type="email" th:field="*{email}" id="email">
 
                 <br><br>
 
                 <label for="password">Password</label>
-                <input type="text" th:field="*{password}" id="password">
+                <input type="password" th:field="*{password}" id="password">
 
                 <br><br>
 
-                <label for="patched_roles">Roles</label>
-                <select multiple name="patched_roles" id="patched_roles" th:required="true" size="2">
+                <label for="new_roles">Roles</label>
+                <select multiple name="new_roles" id="new_roles" th:required="true" size="2">
                     <option th:each="role : ${allRoles}"
                             th:value="${role}"
-                            th:text="${role}"
-                            th:selected="${patchedUser.roles.contains(role)}">
+                            th:text="${role}">
                     </option>
                 </select>
 
                 <br><br>
 
-                <input type="submit" value="Update">
+                <input type="submit" value="Add">
 
             </form>
 
@@ -66,6 +64,5 @@
         </div>
 
     </div>
-
 </body>
 </html>

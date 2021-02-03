@@ -20,6 +20,8 @@
             <th>Name</th>
             <th>Surname</th>
             <th>Age</th>
+            <th>Email</th>
+            <th>Roles</th>
             <th>Actions</th>
         </tr>
 
@@ -31,9 +33,17 @@
 
             <td th:utext="${user.getAge()}">age</td>
 
+            <td th:utext="${user.getEmail()}">email</td>
+
             <td>
-                <a th:href="@{/{id}/update(id=${user.getId()})}" th:text="Update">Update</a> or
-                <a th:href="@{/{id}/delete(id=${user.getId()})}" th:text="Delete">Delete</a>
+                <ul th:each="role : ${user.getRoles()}">
+                    <li th:utext="${role}">role</li>
+                </ul>
+            </td>
+
+            <td>
+                <a th:href="@{/admin/{id}/update(id=${user.getId()})}" th:text="Update">Update</a> or
+                <a th:href="@{/admin/{id}/delete(id=${user.getId()})}" th:text="Delete">Delete</a>
             </td>
 
         </tr>
@@ -41,8 +51,8 @@
 
     <br>
 
-    <input type="button" value="Add new user" onclick="window.location.href = '/add-new-user'"/>
-
+    <input type="button" value="Add new user" onclick="window.location.href = '/admin/add-new-user'"/>
+    <input type="button" value="Logout" onclick="window.location.href = '/logout'"/>
 </div>
 </body>
 </html>

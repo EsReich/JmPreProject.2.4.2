@@ -1,66 +1,30 @@
 package web.crud.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import web.crud.entity.User;
-import web.crud.service.UserService;
 
-import java.util.List;
+import java.security.Principal;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserDetailsService userDetailsService;
 
-    @GetMapping("/")
-    public String getAllUsers(Model model) {
+    @GetMapping
+    public String getUserPage(Principal principal, Model model) {
+        User user = (User) userDetailsService.loadUserByUsername(principal.getName());
 
-        List<User> allUsers = userService.getAllUsers();
-        model.addAttribute("users", allUsers);
-        return "all_users";
-    }
+        model.addAttribute("user", user);
 
-    @GetMapping("/add-new-user")
-    public String addUser(Model model) {
-        model.addAttribute("user", new User());
+//        model.addAttribute("principal", principal);
 
-        return "user_info";
-    }
-
-    @PostMapping("/")
-    public String saveUser(@ModelAttribute("user") User user) {
-//        userService.saveOrUpdateUser(user);
-        userService.saveUser(user);
-
-        return "redirect:/";
-    }
-
-    @GetMapping("/{id}/update")
-    public String updateInfo(@PathVariable(name = "id") Integer id, Model model) {
-        model.addAttribute("patchedUser", userService.getUser(id));
-
-        return "user_update";
-    }
-
-    @PatchMapping("/")
-    public String updateUser(@ModelAttribute("patchedUser") User user) {
-//        userService.saveOrUpdateUser(user);
-        userService.updateUser(user);
-        return "redirect:/";
-    }
-
-    @GetMapping("/{id}/delete")
-    public String deleteInfo(@PathVariable(name = "id") Integer id, Model model) {
-        model.addAttribute("deletedUser", userService.getUser(id));
-        return "user_delete";
-    }
-
-    @DeleteMapping("/")
-    public String deleteUser(@ModelAttribute("deletedUser") User user) {
-        userService.deleteUser(user);
-        return "redirect:/";
+        return "user_page";
     }
 }

@@ -7,21 +7,26 @@
 <body>
     <div style="background-color: lightcoral; width: 25%">
         <h2>Deleting user</h2>
-        <p>Name: <span th:text="${deletedUser.getName()}"></span></p>
-        <p>Surname: <span th:text="${deletedUser.getSurname()}"></span></p>
-        <p>Age: <span th:text="${deletedUser.getAge()}"></span></p>
+<!--        <p>Name: <span th:text="${deletedUser.getName()}"></span></p>-->
+        <p>Name: [[${deletedUser.getName()}]]</p>
+        <p>Surname: [[${deletedUser.getSurname()}]]</p>
+        <p>Age: [[${deletedUser.getAge()}]]</p>
+        <p>Email: [[${deletedUser.email}]]</p>
+        <p>Roles:</p>
+        <ul th:each="role : ${deletedUser.getRoles()}">
+            <li th:utext="${role}">role</li>
+        </ul>
 
         <br>
 
-        <form th:method="DELETE" th:action="@{/}" th:object="${deletedUser}">
-
+        <form th:method="DELETE" th:action="@{/admin}" th:object="${deletedUser}">
             <input type="hidden" th:field="*{id}" id="id">
-            <input type="hidden" th:field="*{name}" id="name">
-            <input type="hidden" th:field="*{surname}" id="surname">
-            <input type="hidden" th:field="*{age}" id="age">
-
             <input type="submit" value="Delete">
         </form>
+
+        <br>
+
+        <input type="button" value="Logout" onclick="window.location.href = '/logout'"/>
 
     </div>
 </body>
