@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @Table(name = "users")
 public class User implements UserDetails {
 
+    @Column(name = "enabled")
     private boolean isActive = true;
 
     @Id

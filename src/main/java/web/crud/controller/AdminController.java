@@ -100,7 +100,7 @@ public class AdminController {
     private Set<Role> getSetFromArray(String[] roles) {
         Set<Role> rolesSet = roleService.getAllRoles()
                             .stream().filter(role -> Arrays.asList(roles)
-                            .contains(role.getRoleName().name()))
+                            .contains(role.getRoleName()))
                             .collect(Collectors.toSet());
 
         return rolesSet;
